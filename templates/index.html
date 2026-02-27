@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Sugar Prediction - AI Health Screening</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=2">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar glass-panel">
+            <div class="nav-content">
+                <div class="nav-titles">
+                    <h1>Blood Sugar Predictor</h1>
+                    <p class="subtitle">AI-Powered Health Screening | NIH-K43 Study</p>
+                </div>
+                <div class="student-info">
+                    <span class="student-name">Karthick T</span>
+                    <span class="student-roll">Roll No: 2023511027</span>
+                </div>
+            </div>
+        </nav>
+
+        <div class="info-banner glass-panel">
+            <h2>🎯 Predict Elevated Blood Glucose Risk</h2>
+            <p>This tool uses an advanced machine learning model trained on the NIH-K43 Community Screening dataset to
+                assess diabetes risk based on clinical markers.</p>
+            <p><strong>Key Predictors:</strong> Uric Acid, Age, BP, BMI</p>
+        </div>
+
+        <form id="predictionForm" class="prediction-form glass-panel">
+            <h3>📋 Patient Information</h3>
+
+            <div class="form-grid">
+                <!-- Top 4 Most Important Features -->
+                <div class="form-section highlight">
+                    <h4>🔴 Primary Risk Factors</h4>
+
+                    <div class="form-group">
+                        <label for="uric_acid">
+                            <span>Uric Acid (mg/dL)</span>
+                            <span class="importance">★ Most Important</span>
+                        </label>
+                        <input type="number" step="0.1" id="uric_acid" name="uric_acid" min="2" max="10" required
+                            placeholder="Normal: 3-8">
+                        <small>Normal range: 3-8 mg/dL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">
+                            <span>Age (years)</span>
+                            <span class="importance">★★ Very Important</span>
+                        </label>
+                        <input type="number" id="age" name="age" min="18" max="100" required placeholder="20-70">
+                        <small>Range: 20-70 years</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="systolic_bp">
+                            <span>Systolic BP (mmHg)</span>
+                            <span class="importance">★★ Very Important</span>
+                        </label>
+                        <input type="number" id="systolic_bp" name="systolic_bp" min="80" max="200" required
+                            placeholder="Normal: 90-120">
+                        <small>Normal: 90-120 mmHg</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bmi">
+                            <span>BMI (kg/m²)</span>
+                            <span class="importance">★★ Very Important</span>
+                        </label>
+                        <input type="number" step="0.1" id="bmi" name="bmi" min="15" max="50" required
+                            placeholder="Normal: 18.5-24.9">
+                        <small>Normal: 18.5-24.9 kg/m²</small>
+                    </div>
+                </div>
+
+                <!-- Other Clinical Measurements -->
+                <div class="form-section">
+                    <h4>💉 Clinical Measurements</h4>
+
+                    <div class="form-group">
+                        <label for="diastolic_bp">Diastolic BP (mmHg)</label>
+                        <input type="number" id="diastolic_bp" name="diastolic_bp" min="40" max="120" required
+                            placeholder="Normal: 60-80">
+                        <small>Normal: 60-80 mmHg</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fasting_glucose">Fasting Glucose (mg/dL)</label>
+                        <input type="number" id="fasting_glucose" name="fasting_glucose" min="50" max="200" required
+                            placeholder="Normal: 70-100">
+                        <small>Normal: 70-100 mg/dL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cholesterol">Total Cholesterol (mg/dL)</label>
+                        <input type="number" id="cholesterol" name="cholesterol" min="100" max="400" required
+                            placeholder="Normal: <200">
+                        <small>Desirable: &lt;200 mg/dL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="triglycerides">Triglycerides (mg/dL)</label>
+                        <input type="number" id="triglycerides" name="triglycerides" min="30" max="400" required
+                            placeholder="Normal: <150">
+                        <small>Normal: &lt;150 mg/dL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hdl_cholesterol">HDL Cholesterol (mg/dL)</label>
+                        <input type="number" id="hdl_cholesterol" name="hdl_cholesterol" min="20" max="100" required
+                            placeholder="Good: >60">
+                        <small>Good: &gt;60 mg/dL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ldl_cholesterol">LDL Cholesterol (mg/dL)</label>
+                        <input type="number" id="ldl_cholesterol" name="ldl_cholesterol" min="50" max="250" required
+                            placeholder="Optimal: <100">
+                        <small>Optimal: &lt;100 mg/dL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="creatinine">Creatinine (mg/dL)</label>
+                        <input type="number" step="0.1" id="creatinine" name="creatinine" min="0.3" max="3" required
+                            placeholder="Normal: 0.7-1.3">
+                        <small>Normal: 0.7-1.3 mg/dL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="albumin">Albumin (g/dL)</label>
+                        <input type="number" step="0.1" id="albumin" name="albumin" min="2" max="6" required
+                            placeholder="Normal: 3.5-5.5">
+                        <small>Normal: 3.5-5.5 g/dL</small>
+                    </div>
+                </div>
+
+                <!-- Physical & Lifestyle -->
+                <div class="form-section">
+                    <h4>📐 Physical & Lifestyle</h4>
+
+                    <div class="form-group">
+                        <label for="waist_circumference">Waist Circumference (cm)</label>
+                        <input type="number" step="0.1" id="waist_circumference" name="waist_circumference" min="50"
+                            max="150" required placeholder="60-120">
+                        <small>Range: 60-120 cm</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hip_circumference">Hip Circumference (cm)</label>
+                        <input type="number" step="0.1" id="hip_circumference" name="hip_circumference" min="60"
+                            max="160" required placeholder="80-130">
+                        <small>Range: 80-130 cm</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="heart_rate">Heart Rate (bpm)</label>
+                        <input type="number" id="heart_rate" name="heart_rate" min="40" max="150" required
+                            placeholder="Normal: 60-100">
+                        <small>Normal: 60-100 bpm</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="smoking_status">Smoking Status</label>
+                        <select id="smoking_status" name="smoking_status" required>
+                            <option value="">Select...</option>
+                            <option value="0">Non-smoker</option>
+                            <option value="1">Smoker</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="family_history">Family History of Diabetes</label>
+                        <select id="family_history" name="family_history" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="physical_activity">Physical Activity Level (0-10)</label>
+                        <input type="number" id="physical_activity" name="physical_activity" min="0" max="10" required
+                            placeholder="0=sedentary, 10=very active">
+                        <small>0=sedentary, 10=very active</small>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-predict">🔍 Predict Risk</button>
+        </form>
+
+        <div id="result" class="result glass-panel"></div>
+    </div>
+
+    <footer>
+        <p>⚕️ Based on NIH-K43 Community Screening Dataset | For research and educational purposes only</p>
+        <p>⚠️ This tool does not replace professional medical advice. Consult healthcare professionals for diagnosis.
+        </p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

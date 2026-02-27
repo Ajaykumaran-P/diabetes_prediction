@@ -1,0 +1,65 @@
+# .gitignore for Diabetes Prediction Project
+
+# Dataset files (do not commit sensitive health data)
+data/*.csv
+data/*.xlsx
+data/*.xls
+!data/README.md
+
+# Model files (too large for git)
+models/*.pkl
+models/*.joblib
+models/*.h5
+
+# Output files
+outputs/*.png
+outputs/*.jpg
+outputs/*.pdf
+outputs/*.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+notebooks/*.ipynb
+!notebooks/example.ipynb
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
