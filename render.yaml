@@ -2,6 +2,7 @@ services:
   - type: web
     name: diabetes-prediction
     env: python
+    plan: free
     buildCommand: "pip install -r requirements.txt && python create_pretrained_model.py"
     startCommand: "gunicorn app:app"
     envVars:
